@@ -1,7 +1,7 @@
+; audio playback demo
+
 ; use ffmpeg to convert an audio file for playback:
 ; ffmpeg -i input.mp3 -f s16le -ac 1 -ar 22050 audio.raw
-
-    org 0x00000800
 
     ; set pointer to audio data
     mov r0, audio_buffer
@@ -21,4 +21,5 @@ audio_buffer:
     data.fill 0, 32768
 audio_buffer_end:
 
-    #include "../../../fox32rom/fox32rom.def"
+    #include "../../fox32rom/fox32rom.def"
+    #include "../../fox32os/fox32os.def"

@@ -1,3 +1,5 @@
+; mouse painting demo
+
     call enable_menu_bar
     call clear_menu_bar
     mov r0, menu_items_root
@@ -104,4 +106,5 @@ menu_items_background_list:
 
 is_drawing: data.8 0
 
-    #include "../../../fox32rom/fox32rom.def"
+    #include "../../fox32rom/fox32rom.def"
+    #include "../../fox32os/fox32os.def"
