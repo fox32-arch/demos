@@ -12,7 +12,10 @@
 
     ; play it! this routine is non-blocking
     call play_audio
-    rjmp 0
+
+yield_loop:
+    call yield_task
+    rjmp yield_loop
 
 audio_buffer:
     #include_bin "audio.raw"

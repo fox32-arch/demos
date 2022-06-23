@@ -34,6 +34,7 @@ event_loop:
     cmp r0, EVENT_TYPE_MENU_CLICK
     ifz call menu_click_event
 
+    call yield_task
     jmp event_loop
 
 menu_click_event:

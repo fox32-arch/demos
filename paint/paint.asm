@@ -35,6 +35,7 @@ event_loop:
     cmp.8 [is_drawing], 0
     ifnz call draw_pixel
 
+    call yield_task
     jmp event_loop
 
 menu_click_event:
