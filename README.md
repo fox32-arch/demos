@@ -1,7 +1,9 @@
 # fox32os Demos
 
+ - [allocate](allocate) - memory allocation demo
  - [audio](audio) - audio playback demo
  - [menu](menu) - menu bar demo
+ - [multitasking](multitasking) - multitasking demo
  - [paint](paint) - mouse painting demo
 
 ## Building
