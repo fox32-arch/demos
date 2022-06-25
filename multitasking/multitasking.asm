@@ -4,27 +4,31 @@
     ; first, allocate 256 byte memory blocks to be used as stacks by tasks 1 and 2
     mov r0, 256
     call allocate_memory
+    add r0, 256                    ; add 256 so the stach pointer is at the end of the stack block (stack grows down)
     mov [task_1_stack_pointer], r0
     mov r0, 256
     call allocate_memory
+    add r0, 256                    ; add 256 so the stach pointer is at the end of the stack block (stack grows down)
     mov [task_2_stack_pointer], r0
 
     ; start task 1
     mov r0, 1                      ; task ID
-    mov r1, task_1                 ; pointer to task code block
-    mov r2, [task_1_stack_pointer] ; pointer to task stack block
+    mov r1, task_1                 ; initial instruction pointer
+    mov r2, [task_1_stack_pointer] ; initial stack pointer
     mov r3, 0                      ; pointer to task code block to free when task ends
                                    ; (zero since we don't want to free any code blocks when the task ends)
     mov r4, [task_1_stack_pointer] ; pointer to task stack block to free when task ends
+    sub r4, 256                    ; point to the start of the stack block that we allocated above
     call new_task
 
     ; start task 2
     mov r0, 2                      ; task ID
-    mov r1, task_2                 ; pointer to task code block
-    mov r2, [task_2_stack_pointer] ; pointer to task stack block
+    mov r1, task_2                 ; initial instruction pointer
+    mov r2, [task_2_stack_pointer] ; initial stack pointer
     mov r3, 0                      ; pointer to task code block to free when task ends
                                    ; (zero since we don't want to free any code blocks when the task ends)
     mov r4, [task_2_stack_pointer] ; pointer to task stack block to free when task ends
+    sub r4, 256                    ; point to the start of the stack block that we allocated above
     call new_task
 
     ; end task 0
