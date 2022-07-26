@@ -3,7 +3,7 @@
 **fox32** is a fantasy computer made up of a few different components:
  - The virtual machine and architecture itself is called **fox32**. It's what everything runs on top of.
  - The boot ROM is called **fox32rom**. It contains a bunch of useful routines that can be used for your own purposes. Think of it as something similar to Apple's Macintosh Toolbox ROM.
- - The operating system is called **fox32os**. It runs on top of fox32rom and allows the use of relocatable FXF binaries, cooperative multitasking, and filesystem access. This is what your programs will run on top of.
+ - The operating system is called **fox32os**. It runs on top of fox32rom and allows the use of relocatable FXF binaries, cooperative multitasking, filesystem access, and memory allocation. This is what your programs will run on top of.
 
 Programs are written in a custom assembly language, with mnemonics inspired by x86 and Z80. Here's a little example which draws "hello world" at position 16x16:
 ```
@@ -36,3 +36,5 @@ Let's go over this!
  - `data.8 ...` - Define a single byte (used here as the null-terminator for the string)
  - `#include "fox32rom.def"` - Include the **fox32rom** definition file
  - `#include "fox32os.def"` - Include the **fox32os** definition file
+
+< Previous Section | [Next Section >](02-memory.md)
