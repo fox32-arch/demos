@@ -169,4 +169,4 @@ sable_image:
     #include "../../../fox32rom/fox32rom.def"
     #include "../../../fox32os/fox32os.def"
 
-overlay_framebuffer:
+overlay_framebuffer: data.fill 0, 0x2000 ; 512x16
