@@ -92,5 +92,5 @@ task_1_stack_pointer: data.32 0
 task_2_stack_pointer: data.32 0
 task_id_str: data.str "Task %u: " data.8 0
 
-    #include "../../fox32rom/fox32rom.def"
-    #include "../../fox32os/fox32os.def"
+    #include "../../../fox32rom/fox32rom.def"
+    #include "../../../fox32os/fox32os.def"

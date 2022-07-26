@@ -107,5 +107,5 @@ menu_items_background_list:
 
 is_drawing: data.8 0
 
-    #include "../../fox32rom/fox32rom.def"
-    #include "../../fox32os/fox32os.def"
+    #include "../../../fox32rom/fox32rom.def"
+    #include "../../../fox32os/fox32os.def"

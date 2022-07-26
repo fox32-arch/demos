@@ -166,7 +166,7 @@ fox_image:
 sable_image:
     #include_bin "sable.raw"
 
-    #include "../../fox32rom/fox32rom.def"
-    #include "../../fox32os/fox32os.def"
+    #include "../../../fox32rom/fox32rom.def"
+    #include "../../../fox32os/fox32os.def"
 
 overlay_framebuffer:

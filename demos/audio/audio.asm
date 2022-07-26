@@ -24,5 +24,5 @@ audio_buffer:
     data.fill 0, 32768
 audio_buffer_end:
 
-    #include "../../fox32rom/fox32rom.def"
-    #include "../../fox32os/fox32os.def"
+    #include "../../../fox32rom/fox32rom.def"
+    #include "../../../fox32os/fox32os.def"
