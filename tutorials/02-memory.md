@@ -10,11 +10,11 @@
 |       |
 |       |
 |       |
-|       |
-|   R   |
+|       | - 0x????????-0x01FFF800 - stack (grows downwards!!)
+|   R   | - 0x01FFF800-0x01FFFFFF - fox32rom temporary data
 |   /   | - 0x02000000-0x0212BFFF - background framebuffer
 |   W   | - 0x0212C000-0x0213BFFF - audio buffers
-|       |
+|       | - 0x0214C000-0x0228FFFF - fox32rom temporary data
 |       |
 |       |
 |       |
