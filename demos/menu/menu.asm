@@ -7,16 +7,21 @@
     call draw_menu_bar_root_items
 
     ; set properties of overlay 0
-    mov r0, 0x80000000 ; position
-    out r0, 0x00200010
-    mov r0, 0x80000100 ; size
-    out r0, 0x00100200
-    mov r0, 0x80000200 ; framebuffer pointer
-    out r0, overlay_framebuffer
+    mov r0, 16
+    mov r1, 32
+    mov r2, 0
+    call move_overlay
+    mov r0, 512
+    mov r1, 16
+    mov r2, 0
+    call resize_overlay
+    mov r0, overlay_framebuffer
+    mov r1, 0
+    call set_overlay_framebuffer_pointer
 
     ; enable overlay 0
-    mov r0, 0x80000300
-    out r0, 1
+    mov r0, 0
+    call enable_overlay
 
 event_loop:
     call get_next_event
