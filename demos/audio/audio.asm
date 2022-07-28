@@ -10,6 +10,9 @@
     mov r1, audio_buffer_end
     sub r1, audio_buffer
 
+    ; set audio sample rate
+    mov r2, 22050
+
     ; play it! this routine is non-blocking
     call play_audio
 
