@@ -13,6 +13,9 @@
     ; set audio sample rate
     mov r2, 22050
 
+    ; play on channel 0
+    mov r3, 0
+
     ; play it! this routine is non-blocking
     call play_audio
 
