@@ -1,6 +1,6 @@
 # **Section 2**: Memory
 
-**fox32**'s memory is laid out as a flat space spanning from addresses 0x00000000 to 0x03FFFFFF (R/W) and 0xF0000000 to 0xF007FFFF (R/O). There is no paging or segmentation. A few things are placed at fixed locations in memory, as shown in the diagram below. The unused portions of memory are free to be used for your own purposes. **fox32os** provides a memory allocator that allows you to dynamically allocate and free memory while your program is running.
+**fox32**'s physical memory is laid out as a flat space spanning from addresses 0x00000000 to 0x03FFFFFF (R/W) and 0xF0000000 to 0xF007FFFF (R/O). Paging can be optionally be enabled. A few things are placed at fixed locations in memory, as shown in the diagram below. The unused portions of memory are free to be used for your own purposes. **fox32os** provides a memory allocator that allows you to dynamically allocate and free memory while your program is running.
 
 ```
 --------- - 0x00000000
@@ -13,9 +13,9 @@
 |       | - 0x????????-0x01FFF800 - stack (grows downwards!!)
 |   R   | - 0x01FFF800-0x01FFFFFF - fox32rom temporary data
 |   /   | - 0x02000000-0x0212BFFF - background framebuffer
-|   W   | - 0x0212C000-0x0213BFFF - audio buffers
+|   W   | - 0x0212C000-0x0213BFFF - audio buffers 0 & 1
 |       | - 0x0214C000-0x0228FFFF - fox32rom temporary data
-|       |
+|       | - 0x02290000-0x0229FFFF - audio buffers 2 & 3
 |       |
 |       |
 |       |
