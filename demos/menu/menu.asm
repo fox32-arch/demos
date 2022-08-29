@@ -64,8 +64,12 @@ system_menu_click_event:
     ; r2 contains the clicked root menu
     ; r3 contains the clicked menu item
 
-    ; shut down
+    ; end task
     cmp r3, 0
+    call end_current_task
+
+    ; shut down
+    cmp r3, 1
     ifz icl
     ifz halt
 
@@ -150,8 +154,9 @@ menu_items_background_name:
 menu_items_text_name:
     data.8 10 data.str "Text"       data.8 0x00 ; text length, text, null-terminator
 menu_items_system_list:
-    data.8 1                                     ; number of items
+    data.8 2                                     ; number of items
     data.8 11                                    ; menu width (usually longest item + 2)
+    data.8 8  data.str "End Task"  data.8 0x00   ; text length, text, null-terminator
     data.8 9  data.str "Shut Down" data.8 0x00   ; text length, text, null-terminator
 menu_items_background_list:
     data.8 2                                     ; number of items
@@ -174,4 +179,4 @@ sable_image:
     #include "../../../fox32rom/fox32rom.def"
     #include "../../../fox32os/fox32os.def"
 
-overlay_framebuffer: data.fill 0, 0x2000 ; 512x16
+overlay_framebuffer: data.fill 0, 0x8000 ; 512x16x4
