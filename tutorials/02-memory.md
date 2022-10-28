@@ -5,7 +5,7 @@
 ```
 --------- - 0x00000000
 |       | - 0x00000000-0x000007FF - interrupt and exception vectors
-|       | - 0x00000800            - fox32os entry point
+|       | - 0x00000800            - fox32os bootloader entry point
 |       | - 0x00000810            - fox32os routine jump table
 |       |
 |       |
@@ -16,7 +16,7 @@
 |   W   | - 0x0212C000-0x0213BFFF - audio buffers 0 & 1
 |       | - 0x0214C000-0x0228FFFF - fox32rom temporary data
 |       | - 0x02290000-0x0229FFFF - audio buffers 2 & 3
-|       |
+|       | - 0x03000000            - fox32os entry point
 |       |
 |       |
 |       |
