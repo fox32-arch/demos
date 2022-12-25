@@ -28,7 +28,7 @@ event_loop:
 
     ; did the user click somewhere in the window?
     cmp r0, EVENT_TYPE_MOUSE_CLICK
-    ifz call mouse_down
+    ifz call mouse_click_event
 
     call yield_task
     rjmp event_loop
@@ -39,7 +39,7 @@ clear_window:
     call fill_window
     ret
 
-mouse_down:
+mouse_click_event:
     push r0
 
     ; first, check if we are attempting to drag or close the window
