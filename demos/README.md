@@ -2,8 +2,8 @@
 
  - [allocate](allocate) - memory allocation demo
  - [audio](audio) - audio playback demo
+ - [foxpaint](foxpaint) - mouse painting demo
  - [multitasking](multitasking) - multitasking demo
- - [paint](paint) - mouse painting demo
  - [robotfindskitten](robotfindskitten) - a simple remake of the well-known robotfindskitten game
  - [window](window) - window creation demo
 
