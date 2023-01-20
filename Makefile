@@ -1,6 +1,7 @@
 FOX32ASM := ../fox32asm/target/release/fox32asm
 
 SRC = \
+      demos/hello_world/hello.asm \
       demos/allocate/allocate.asm \
       demos/audio/audio.asm \
       demos/multitasking/multitasking.asm \

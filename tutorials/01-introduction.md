@@ -37,4 +37,11 @@ Let's go over this!
  - `#include "fox32rom.def"` - Include the **fox32rom** definition file
  - `#include "fox32os.def"` - Include the **fox32os** definition file
 
+You can start this program with:
+
+```
+make
+fox32 --disk ../fox32os/fox32os.img --disk demos/hello_world/hello.fxf
+```
+
 < Previous Section | [Next Section >](02-memory.md)
