@@ -1,0 +1,39 @@
+on: [push]
+
+name: fox32 demos buildtest
+
+jobs:
+  demos-unstable:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download latest fox32asm artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          repo: fox32-arch/fox32asm
+          workflow: fox32asm-unstable-linux.yml
+          workflow_conclusion: success
+
+      - name: Download latest fox32rom artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          repo: fox32-arch/fox32rom
+          workflow: fox32rom-unstable.yml
+          workflow_conclusion: success
+
+      - name: Download latest fox32os artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          repo: fox32-arch/fox32os
+          workflow: fox32os-unstable.yml
+          workflow_conclusion: success
+
+      - name: Build
+        run: |
+          mkdir ../fox32rom ../fox32os
+          cp fox32rom.def/fox32rom.def ../fox32rom
+          cp fox32os.def/fox32os.def ../fox32os
+          chmod +x fox32asm/fox32asm
+          make FOX32ASM=fox32asm/fox32asm
