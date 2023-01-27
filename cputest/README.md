@@ -21,9 +21,7 @@ grep -q "All tests passed" cputest/cputest.log
 - decoding edgecases and variations (also test all valid variants)
   - invalid register number
     - across source/target and all addressing modes
-  - invalid condition code
 - test preservation of upper bits in 8/16 bit operations except MOVZ
-- test behavior of different condition codes
 - test exceptions
   - page faults
     - across page boundaries
