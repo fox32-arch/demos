@@ -128,10 +128,12 @@ example_table:
 	data.32 0
 
 #include "div0.asm"
+#include "decode.asm"
 
 supertable:
 	data.32 example_table_name  data.32 example_table
 	data.32 div0_table_name  data.32 div0_table
+	data.32 decode_table_name  data.32 decode_table
 	data.32 0
 
 
