@@ -37,3 +37,20 @@ jobs:
           cp fox32os.def/fox32os.def ../fox32os
           chmod +x fox32asm/fox32asm
           make FOX32ASM=fox32asm/fox32asm
+
+      - name: Install libsdl2
+        run: |
+          sudo apt update
+          sudo apt install -y libsdl2-2.0-0
+
+      - name: Download latest fox32 artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          repo: fox32-arch/fox32
+          workflow: fox32-unstable-linux.yml
+          workflow_conclusion: success
+
+      - name: Run CPU test
+        run: |
+          chmod +x fox32/fox32
+          make test FOX32=fox32/fox32 FOX32OS_IMG=fox32os.img/fox32os.img
