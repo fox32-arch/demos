@@ -127,8 +127,11 @@ example_table:
 	;data.32 example2_name  data.32 example2_fn
 	data.32 0
 
+#include "div0.asm"
+
 supertable:
 	data.32 example_table_name  data.32 example_table
+	data.32 div0_table_name  data.32 div0_table
 	data.32 0
 
 
