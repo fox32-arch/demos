@@ -13,7 +13,9 @@ SRC = \
 
 FXF = $(subst .asm,.fxf,$(SRC))
 
-all: $(FXF)
+BIN = cputest/cputest.bin
+
+all: $(FXF) $(BIN)
 
 %.fxf: %.asm
 	$(FOX32ASM) $< $@
@@ -28,13 +30,20 @@ demos/audio/audio.raw:
 	# create empty dummy file
 	touch $@
 
+cputest/cputest.bin: cputest/cputest-bin.asm $(wildcard cputest/*.asm)
+	$(FOX32ASM) $< $@
+
 clean:
 	rm -f $(FXF) cputest/cputest.log
 
 .PHONY: clean all cputest/cputest.log
 
-test: cputest/cputest.log
+test: cputest/cputest.log cputest/cputest.bin.log
 	grep -q "All tests passed" cputest/cputest.log
+	grep -q "All tests passed" cputest/cputest.bin.log
 
 cputest/cputest.log: cputest/cputest.fxf
-	$(FOX32) --headless --disk $(FOX32OS_IMG) --disk cputest/cputest.fxf | tee cputest/cputest.log
+	$(FOX32) --headless --disk $(FOX32OS_IMG) --disk $< | tee $@
+
+cputest/cputest.bin.log: cputest/cputest.bin
+	$(FOX32) --headless --disk $< | tee $@

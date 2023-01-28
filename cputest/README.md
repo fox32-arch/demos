@@ -11,6 +11,8 @@ All tests passed.
 grep -q "All tests passed" cputest/cputest.log
 ```
 
+`cputest.fxf` can be run under fox32os, `cputest.bin` can be run either as a ROM or as a disk.
+
 ## TODO
 
 - arithmetic tests
