@@ -197,13 +197,13 @@ run_test:
 	mov	r29, r1
 	mov	r30, r1
 	mov	r31, r1
-	mov	[0x400], handle_exception0
-	mov	[0x404], handle_exception1
-	mov	[0x408], handle_exception2
-	mov	[0x40c], handle_exception3
-	mov	[0x410], handle_exception4
-	mov	[0x000], handle_int
-	mov	[0x004], handle_int
+	rta	[0x400], handle_exception0
+	rta	[0x404], handle_exception1
+	rta	[0x408], handle_exception2
+	rta	[0x40c], handle_exception3
+	rta	[0x410], handle_exception4
+	rta	[0x000], handle_int
+	rta	[0x004], handle_int
 
 	mov	resp, rsp
 	mov	r1, rsp
@@ -227,15 +227,15 @@ handle_exception:
 	pop.8	r9      ; flags
 	pop	r10     ; instruction pointer
 	pop	r11     ; old stack pointer
-	mov	r0, badex
+	rta	r0, badex
 	rcall	putstr
 	mov	r0, r12
 	rcall	puthex4
-	mov	r0, badex1
+	rta	r0, badex1
 	rcall	putstr
 	mov	r0, r10
 	rcall	puthex32
-	mov	r0, badex2
+	rta	r0, badex2
 	rcall	putstr
 	mov	r0, r8
 	rcall	puthex32
@@ -293,7 +293,7 @@ running: data.str ">>> Running " data.8 0
 
 run_tests:
 	; iterate through all test tables
-	mov	r8, supertable
+	rta	r8, supertable
 	mov	r10, 0
 
   run_tests_super_loop:
@@ -302,7 +302,7 @@ run_tests:
 ifz	mov	r0, r10   ; return fail count at end of table
 ifz	ret
 
-	mov	r0, running
+	rta	r0, running
 	rcall	putstr
 	mov	r0, [r8]  ; get name
 	and	r0, r0
@@ -319,7 +319,7 @@ ifz	ret
 ifz	rjmp	run_tests_super_loop
 
 	rcall	putstr
-	mov	r0, dots
+	rta	r0, dots
 	rcall	putstr
 
 	add	r9, 4
@@ -329,8 +329,8 @@ ifz	rjmp	run_tests_super_loop
 	rcall	run_test
 
 	and	r0, r0
-	mov	r0, pass
-ifz	mov	r0, fail
+	rta	r0, pass
+ifz	rta	r0, fail
 ifz	inc	r10       ; count the failure
 	rcall	puts
 	rjmp	run_tests_loop
@@ -347,7 +347,7 @@ silence_interrupts:
 	; install interrupt handlers that don't cause memory curruption issues
 	mov	r0, 0
   silence_loop:
-	mov	[r0], silence
+	rta	[r0], silence
 	add	r0, 4
 	cmp	r0, 0x400
 iflt	rjmp	silence_loop
@@ -359,14 +359,14 @@ silence:
 
 main:
 	; main entry point
-	mov	r0, hello
+	rta	r0, hello
 	rcall	puts
 	rcall	silence_interrupts
 	rcall	run_tests
 	and	r0, r0
-ifz	mov	r0, allpass
+ifz	rta	r0, allpass
 ifz	rcall	puts
 ifnz	rcall	puthex32
-ifnz	mov	r0, failed
+ifnz	rta	r0, failed
 ifnz	rcall	puts
 	rcall	shutdown
