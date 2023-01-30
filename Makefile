@@ -11,6 +11,7 @@ SRC = \
       demos/multitasking/multitasking.asm \
       demos/robotfindskitten/main.asm \
       demos/window/window.asm \
+      demos/terminal/termio.asm \
       cputest/cputest.asm
 
 FXF = $(subst .asm,.fxf,$(SRC))
