@@ -1,3 +1,4 @@
 *.fxf
+*.bin
 demos/audio/audio.raw
 cputest/cputest.log
