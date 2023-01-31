@@ -19,9 +19,3 @@ grep -q "All tests passed" cputest/cputest.log
   - perform some calculations and check the results
   - check that the flags are set correctly
 - test preservation of upper bits in 8/16 bit operations except MOVZ
-- test exceptions
-  - page faults
-    - across page boundaries
-  - divide by zero
-  - invalid opcode, invalid opsize
-- test MMU page crossing edge cases
