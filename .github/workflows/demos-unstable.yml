@@ -54,3 +54,17 @@ jobs:
         run: |
           chmod +x fox32/fox32
           make test FOX32=fox32/fox32 FOX32OS_IMG=fox32os.img/fox32os.img
+
+      - name: Upload demos
+        uses: actions/upload-artifact@v3
+        with:
+          name: demos
+          path: demos/*/*.fxf
+
+      - name: Upload cputest
+        uses: actions/upload-artifact@v3
+        with:
+          name: cputest
+          path: |
+            cputest/cputest.bin
+            cputest/cputest.fxf

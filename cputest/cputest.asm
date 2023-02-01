@@ -349,7 +349,7 @@ allpass: data.str "All tests passed." data.8 0
 failed:	data.str " tests failed!" data.8 0
 
 silence_interrupts:
-	; install interrupt handlers that don't cause memory curruption issues
+	; install interrupt handlers that don't cause memory corruption issues
 	mov	r0, 0
   silence_loop:
 	rta	[r0], silence
