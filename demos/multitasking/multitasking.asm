@@ -4,11 +4,11 @@
     ; first, allocate 256 byte memory blocks to be used as stacks by tasks 1 and 2
     mov r0, 256
     call allocate_memory
-    add r0, 256                    ; add 256 so the stach pointer is at the end of the stack block (stack grows down)
+    add r0, 256                    ; add 256 so the stack pointer is at the end of the stack block (stack grows down)
     mov [task_1_stack_pointer], r0
     mov r0, 256
     call allocate_memory
-    add r0, 256                    ; add 256 so the stach pointer is at the end of the stack block (stack grows down)
+    add r0, 256                    ; add 256 so the stack pointer is at the end of the stack block (stack grows down)
     mov [task_2_stack_pointer], r0
 
     ; start task 1
