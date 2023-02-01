@@ -1,4 +1,6 @@
 *.fxf
 *.bin
+*.img
 demos/audio/audio.raw
-cputest/cputest.log
+cputest/cputest*.log
+demos.img
