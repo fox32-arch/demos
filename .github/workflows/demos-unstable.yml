@@ -30,13 +30,19 @@ jobs:
           workflow: fox32os-unstable.yml
           workflow_conclusion: success
 
+      - name: Download RYFS tools
+        uses: actions/checkout@v3
+        with:
+          repository: ry755/ryfs
+          path: ryfs
+
       - name: Build
         run: |
           mkdir ../fox32rom ../fox32os
           cp fox32rom.def/fox32rom.def ../fox32rom
           cp fox32os.def/fox32os.def ../fox32os
           chmod +x fox32asm/fox32asm
-          make FOX32ASM=fox32asm/fox32asm
+          make FOX32ASM=fox32asm/fox32asm RYFS=ryfs/ryfs.py
 
       - name: Install libsdl2
         run: |
@@ -59,7 +65,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: demos
-          path: demos/*/*.fxf
+          path: |
+            demos/*/*.fxf
+            demos.img
 
       - name: Upload cputest
         uses: actions/upload-artifact@v3
