@@ -9,7 +9,7 @@ SRC = \
       demos/allocate/allocate.asm \
       demos/audio/audio.asm \
       demos/multitasking/multitasking.asm \
-      demos/robotfindskitten/main.asm \
+      demos/robotfindskitten/rfk.asm \
       demos/window/window.asm \
       cputest/cputest.asm
 
@@ -23,7 +23,7 @@ all: $(FXF) $(BIN) demos.img
 	$(FOX32ASM) $< $@
 
 # Extra dependencies
-demos/robotfindskitten/main.fxf: $(wildcard demos/robotfindskitten/*.asm)
+demos/robotfindskitten/rfk.fxf: $(wildcard demos/robotfindskitten/*.asm)
 cputest/cputest.fxf: $(wildcard cputest/*.asm)
 
 demos/audio/audio.fxf: demos/audio/audio.raw
