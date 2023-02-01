@@ -18,9 +18,6 @@ grep -q "All tests passed" cputest/cputest.log
 - arithmetic tests
   - perform some calculations and check the results
   - check that the flags are set correctly
-- decoding edgecases and variations (also test all valid variants)
-  - invalid register number
-    - across source/target and all addressing modes
 - test preservation of upper bits in 8/16 bit operations except MOVZ
 - test exceptions
   - page faults
