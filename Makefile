@@ -8,7 +8,7 @@ SRC = \
       demos/hello_world/hello.asm \
       demos/allocate/allocate.asm \
       demos/audio/audio.asm \
-      demos/multitasking/multitasking.asm \
+      demos/multitasking/multitsk.asm \
       demos/robotfindskitten/rfk.asm \
       demos/widget/widget.asm \
       demos/window/window.asm \
