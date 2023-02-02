@@ -313,8 +313,8 @@ outimm_fn:
 	out	r0, 0xf0
 	mov	r1, 0x9f
 	out	r0, r1
-	data.16 0x9b02 data.32 0xa6 data.8 0  ; out r0, 0xa6
-	data.16 0x9b0a data.32 0x8a data.32 0 ; out  0, 0x8a
+	out	r0, 0xa6
+	out	0, 0x8a
 	int	1
 
 decode_table_name: data.str "instruction decoding tests" data.8 0
