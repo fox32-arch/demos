@@ -12,6 +12,7 @@ SRC = \
       demos/robotfindskitten/rfk.asm \
 	  demos/widget/widget.asm \
       demos/window/window.asm \
+      demos/terminal/termio.asm \
       cputest/cputest.asm
 
 FXF = $(subst .asm,.fxf,$(SRC))
