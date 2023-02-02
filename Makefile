@@ -10,7 +10,7 @@ SRC = \
       demos/audio/audio.asm \
       demos/multitasking/multitasking.asm \
       demos/robotfindskitten/rfk.asm \
-	  demos/widget/widget.asm \
+      demos/widget/widget.asm \
       demos/window/window.asm \
       demos/terminal/termio.asm \
       cputest/cputest.asm
