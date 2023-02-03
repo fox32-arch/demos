@@ -10,6 +10,5 @@ How does this work?
 
 - commandline argument passing
 - calls out of C, into the ROM
-- fox32-gcc and fox32-g++ scripts
 - testcase sha256 program that hashes the ROM
 - rust support: `rustc --emit asm --target riscv32im-unknown-none-elf test.rs -O`
