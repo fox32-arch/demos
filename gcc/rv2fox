@@ -30,7 +30,7 @@ class Emitter:
         """
         Adjust an operand to the requirements of fox32asm
         """
-        if re.fullmatch('-?[0-9]x?[0-9a-fA-F]*', op):
+        if re.fullmatch(r'-?[0-9]x?[0-9a-fA-F]*', op):
             return f'{int(op, 0) & 0xffffffff:#x}'
         return op
 
@@ -161,7 +161,7 @@ class Converter:
     def convert_directive(self, line):
         if line in ['text', 'data']:
             pass # ignore
-        elif m := re.fullmatch('word\s+([^\s]+)', line):
+        elif m := re.fullmatch(r'word\s+([^\s]+)', line):
             self.e.data(*m.groups())
 
     def reg(self, reg):
@@ -221,7 +221,7 @@ class Converter:
                 self.e.insn(op, tmp, self.reg(rs2))
                 self.e.mov(self.reg(rd), tmp)
         elif insn in ['sw', 'lw']:
-            rval, offset, rbase = re.fullmatch('([a-z0-9]+),(-?[0-9]+)\(([a-z0-9]+)\)', operands).groups()
+            rval, offset, rbase = re.fullmatch(r'([a-z0-9]+),(-?[0-9]+)\(([a-z0-9]+)\)', operands).groups()
             self.ldst(insn, self.reg(rval), self.reg(rbase), offset)
         elif insn in ['j']:
             self.e.jump(operands)
@@ -262,14 +262,14 @@ class Converter:
             if self.debug:
                 self.e.write(f'\t; {line}')
 
-            if re.fullmatch('\.[a-z]+.*', line):
+            if re.fullmatch(r'\.[a-z]+.*', line):
                 self.convert_directive(line[1:])
-            elif m := re.fullmatch('([a-zA-Z0-9_.]+):', line):
+            elif m := re.fullmatch(r'([a-zA-Z0-9_.]+):', line):
                 self.e.label(*m.groups())
-            elif m := re.fullmatch('([a-z]+)', line) or \
-                      re.fullmatch('([a-z]+)\s+([^\s]+)', line):
+            elif m := re.fullmatch(r'([a-z]+)', line) or \
+                      re.fullmatch(r'([a-z]+)\s+([^\s]+)', line):
                 self.convert_insn(*m.groups())
-            elif re.fullmatch('\#[a-zA-Z0-9_.\s]+.*', line):
+            elif re.fullmatch(r'\#[a-zA-Z0-9_.\s]+.*', line):
                 continue
             else:
                 raise Exception(f'Unknown line: {line}')
