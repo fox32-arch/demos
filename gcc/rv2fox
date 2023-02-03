@@ -298,7 +298,7 @@ class Converter:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert RISC-V assembly to fox32 assembly')
     parser.add_argument('input', help='RISC-V input')
-    parser.add_argument('--output', '-o', help='fox32 output')
+    parser.add_argument('-o', '--output', help='fox32 output')
     parser.add_argument('--debug', help='produce verbose output to allow debugging this tool', action='store_true')
     args = parser.parse_args()
     c = Converter(args.input, args.output, debug=args.debug)
