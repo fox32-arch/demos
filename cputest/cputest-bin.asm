@@ -39,10 +39,8 @@ disk_init:
 	mov	r1, 0           ; current block
 	mov	r2, start       ; target address
   disk_loop:
-	; out	0x80002000, r2  ; should work but fox32asm doesn't like it
-	data.16 0x9b08 data.8 2 data.32 0x80002000 ; set buffer pointer
-	; out	0x80003000, r1
-	data.16 0x9b08 data.8 1 data.32 0x80003000 ; initiate read from block
+	out	0x80002000, r2  ; set buffer pointer
+	out	0x80003000, r1  ; initiate read from block
 	inc	r1
 	add	r2, 0x200
 	rloop	disk_loop

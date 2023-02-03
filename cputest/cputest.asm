@@ -129,11 +129,15 @@ example_table:
 
 #include "div0.asm"
 #include "decode.asm"
+#include "cond.asm"
+#include "mem.asm"
 
 supertable:
 	data.32 example_table_name  data.32 example_table
 	data.32 div0_table_name  data.32 div0_table
 	data.32 decode_table_name  data.32 decode_table
+	data.32 cond_table_name   data.32 cond_table
+	data.32 mem_table_name  data.32 mem_table
 	data.32 0
 
 

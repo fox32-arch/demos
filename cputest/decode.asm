@@ -286,7 +286,41 @@ ctrl_actual:   data.str ". Actual length " data.8 0
 ctrl_dot:      data.str "." data.8 0
 
 
+regnum_name: data.strz "Register numbers"
+regnum_fn:
+	xor	r0, r0
+	data.16 0x8100 data.8 0 data.8    0 ; add r0,   r0
+	data.16 0x8100 data.8 0 data.8 0x20 ; add rsp,  r0
+	data.16 0x8100 data.8 0 data.8 0x21 ; add resp, r0
+	data.16 0x8100 data.8 0 data.8 0x22 ; add rfp,  r0
+	mov	[0x404], expect_exception
+	data.16 0x8100 data.8 0 data.8 0x23 ; invalid
+	int	0
+
+incimm_name: data.strz "inc immediate"
+incimm_fn:
+	; the `inc` instruction reads and writes its source operand, so `inc 42` is not allowed.
+	inc	[incimm_buf]
+	mov	[0x404], expect_exception
+	inc	42
+	int	0
+incimm_buf: data.32 42
+
+outimm_name: data.strz "out immediate"
+outimm_fn:
+	; the `out` instruction is special in that it allows an immediate as target operand
+	mov	r0, 0
+	out	r0, 0xf0
+	mov	r1, 0x9f
+	out	r0, r1
+	out	r0, 0xa6
+	out	0, 0x8a
+	int	1
+
 decode_table_name: data.str "instruction decoding tests" data.8 0
 decode_table:
 	data.32 ctrl_name  data.32 ctrl_fn
+	data.32 regnum_name  data.32 regnum_fn
+	data.32 incimm_name  data.32 incimm_fn
+	data.32 outimm_name  data.32 outimm_fn
 	data.32 0
