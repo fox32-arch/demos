@@ -185,7 +185,7 @@ class Converter:
     @staticmethod
     def convert_condition(op):
         if op in ['blt']: return 'iflt', False
-        if op in ['bne']: return 'ifnz', False
+        if op in ['bne', 'bnez']: return 'ifnz', False
         if op in ['ble']: return 'ifgt', True
 
     def convert_branch(self, insn, rs1, rs2, label):
@@ -193,6 +193,13 @@ class Converter:
         if reverse:
             rs1, rs2 = rs2, rs1
         self.e.insn('cmp', self.reg(rs1), self.reg(rs2))
+        self.e.jump(label, cond)
+
+    def convert_branch_imm(self, insn, rs, label, imm):
+        cond, reverse = self.convert_condition(insn)
+        if reverse:
+            rs1, rs2 = rs2, rs1
+        self.e.insn('cmp', self.reg(rs), str(imm))
         self.e.jump(label, cond)
 
     @staticmethod
@@ -251,9 +258,14 @@ class Converter:
             self.e.label(label)
         elif insn in self.branches:
             self.convert_branch(insn, *operands)
+        elif insn in ['bnez']:
+            self.convert_branch_imm(insn, *operands, 0)
         elif insn in ['li']:
             rd, imm = operands
             self.e.mov(self.reg(rd), imm)
+        elif insn in ['lui']:
+            rd, imm = operands
+            self.e.mov(self.reg(rd), str(int(imm, 0) << 12))
         else:
             raise Exception(f'Unknown instruction {insn} {operands}')
 
