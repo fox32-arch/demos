@@ -188,21 +188,29 @@ class Converter:
         if op in ['bne']: return 'ifnz', False
         if op in ['ble']: return 'ifgt', True
 
-    def convert_branch(self, insn, operands):
-        rs1, rs2, label = operands.split(',')
+    def convert_branch(self, insn, rs1, rs2, label):
         cond, reverse = self.convert_condition(insn)
         if reverse:
             rs1, rs2 = rs2, rs1
         self.e.insn('cmp', self.reg(rs1), self.reg(rs2))
         self.e.jump(label, cond)
 
+    @staticmethod
+    def iter_operands(operands):
+        if operands:
+            for op in operands.split(','):
+                op = op.strip()
+                if op != '':
+                    yield op
+
     def convert_insn(self, insn, operands=None):
         tmp = self.tmp
+        operands = list(self.iter_operands(operands))
 
         if insn == 'nop':
             self.e.nop()
         elif insn in ['addi', 'slli']:
-            rd, rs, imm = operands.split(',')
+            rd, rs, imm = operands
             op = self.convert_arithmetic_op(insn)
             if rd == rs:
                 self.e.insn(op, self.reg(rd), imm)
@@ -211,7 +219,7 @@ class Converter:
                 self.e.insn(op, tmp, imm)
                 self.e.mov(self.reg(rd), tmp)
         elif insn in ['add']:
-            rd, rs1, rs2 = operands.split(',')
+            rd, rs1, rs2 = operands
             if rd == rs1:
                 op = self.convert_arithmetic_op(insn)
                 self.e.insn(op, self.reg(rd), self.reg(rs2))
@@ -221,29 +229,30 @@ class Converter:
                 self.e.insn(op, tmp, self.reg(rs2))
                 self.e.mov(self.reg(rd), tmp)
         elif insn in ['sw', 'lw']:
-            rval, offset, rbase = re.fullmatch(r'([a-z0-9]+),(-?[0-9]+)\(([a-z0-9]+)\)', operands).groups()
+            rval, address = operands
+            offset, rbase = re.fullmatch(r'(-?[0-9]+)\(([a-z0-9]+)\)', address).groups()
             self.ldst(insn, self.reg(rval), self.reg(rbase), offset)
         elif insn in ['j']:
-            self.e.jump(operands)
+            self.e.jump(*operands)
         elif insn in ['jr']:
-            self.e.jump_reg(self.reg(operands))
+            self.e.jump_reg(self.reg(*operands))
         elif insn in ['ret']:
             self.e.jump_reg(self.reg('ra'))
         elif insn in ['lla']:
-            rd, label = operands.split(',')
+            rd, label = operands
             self.e.rta(self.reg(rd), label)
         elif insn in ['mv']:
-            rd, rs = operands.split(',')
+            rd, rs = operands
             self.e.mov(self.reg(rd), self.reg(rs))
         elif insn in ['call']:
             label = self.unique_label()
             self.e.mov(self.reg('ra'), label)
-            self.e.jump(operands)
+            self.e.jump(*operands)
             self.e.label(label)
         elif insn in self.branches:
-            self.convert_branch(insn, operands)
+            self.convert_branch(insn, *operands)
         elif insn in ['li']:
-            rd, imm = operands.split(',')
+            rd, imm = operands
             self.e.mov(self.reg(rd), imm)
         else:
             raise Exception(f'Unknown instruction {insn} {operands}')
@@ -267,7 +276,7 @@ class Converter:
             elif m := re.fullmatch(r'([a-zA-Z0-9_.]+):', line):
                 self.e.label(*m.groups())
             elif m := re.fullmatch(r'([a-z]+)', line) or \
-                      re.fullmatch(r'([a-z]+)\s+([^\s]+)', line):
+                      re.fullmatch(r'([a-z]+)\s+([^\s].*)', line):
                 self.convert_insn(*m.groups())
             elif re.fullmatch(r'\#[a-zA-Z0-9_.\s]+.*', line):
                 continue
