@@ -269,6 +269,8 @@ class Converter:
             elif m := re.fullmatch('([a-z]+)', line) or \
                       re.fullmatch('([a-z]+)\s+([^\s]+)', line):
                 self.convert_insn(*m.groups())
+            elif re.fullmatch('\#[a-zA-Z0-9_.\s]+.*', line):
+                continue
             else:
                 raise Exception(f'Unknown line: {line}')
 
