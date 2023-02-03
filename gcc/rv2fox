@@ -271,15 +271,15 @@ class Converter:
             if self.debug:
                 self.e.write(f'\t; {line}')
 
-            if re.fullmatch(r'\.[a-z]+.*', line):
+            if line == '' or re.fullmatch(r'#.*', line):
+                pass
+            elif re.fullmatch(r'\.[a-z]+.*', line):
                 self.convert_directive(line[1:])
             elif m := re.fullmatch(r'([a-zA-Z0-9_.]+):', line):
                 self.e.label(*m.groups())
             elif m := re.fullmatch(r'([a-z]+)', line) or \
                       re.fullmatch(r'([a-z]+)\s+([^\s].*)', line):
                 self.convert_insn(*m.groups())
-            elif re.fullmatch(r'\#[a-zA-Z0-9_.\s]+.*', line):
-                continue
             else:
                 raise Exception(f'Unknown line: {line}')
 
