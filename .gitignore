@@ -4,3 +4,4 @@
 demos/audio/audio.raw
 cputest/cputest*.log
 demos.img
+target/
