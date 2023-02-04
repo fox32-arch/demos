@@ -1,5 +1,6 @@
 FOX32ASM := ../../fox32asm/target/release/fox32asm
 RISCVCC := riscv64-linux-gnu-gcc
+RV2FOX := ../../tools/gcc/rv2fox
 
 all: hello.fxf
 
@@ -7,7 +8,7 @@ all: hello.fxf
 	$(FOX32ASM) $< $@
 
 %.asm: %.s
-	./rv2fox $< -o $@
+	$(RV2FOX) $< -o $@
 
 %.s: %.c
 	$(RISCVCC) -march=rv32im -mabi=ilp32 -Wall -Os $< -S -o $@
