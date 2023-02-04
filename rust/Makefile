@@ -13,4 +13,4 @@ target/riscv32im-unknown-none-elf/release/deps/%.asm: target/riscv32im-unknown-n
 
 target/riscv32im-unknown-none-elf/release/deps/%.s: src/main.rs
 	RUSTFLAGS="--emit asm" $(CARGO) build --release --target riscv32im-unknown-none-elf -Zbuild-std=core
-	ln -sr $(shell ls target/riscv32im-unknown-none-elf/release/deps/hello-*.s) target/riscv32im-unknown-none-elf/release/deps/hello.s
+	mv target/riscv32im-unknown-none-elf/release/deps/hello-*.s target/riscv32im-unknown-none-elf/release/deps/hello.s
