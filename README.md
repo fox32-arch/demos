@@ -4,3 +4,4 @@
  - [tutorials](tutorials) - getting started tutorials
  - [cputest](cputest) - CPU test suite
  - [gcc](gcc) - experiments in compiling C code
+ - [rust](rust) - experiments in compiling Rust code
