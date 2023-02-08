@@ -2,6 +2,4 @@
 	rjmp	main
 
 rv2fox_end:
-	rcall	end_current_task
-
-#include "../../fox32os/fox32os.def"
+	rcall	[0x00000A18] ; end_current_task

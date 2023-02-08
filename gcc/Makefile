@@ -11,4 +11,4 @@ all: hello.fxf
 	$(RV2FOX) $< -o $@
 
 %.s: %.c
-	$(RISCVCC) -march=rv32im -mabi=ilp32 -Wall -Os $< -S -o $@
+	$(RISCVCC) -march=rv32im -mabi=ilp32 -Wall -O0 -fno-stack-protector -fno-section-anchors $< -S -o $@
