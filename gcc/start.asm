@@ -2,4 +2,4 @@
 	rjmp	main
 
 rv2fox_end:
-	rcall	[0x00000A18] ; end_current_task
+	call	[0x00000A18] ; end_current_task
