@@ -42,7 +42,7 @@
             (if (& (u< (w@ (vos_event_args)) 8) (u< (w@ (+ (vos_event_args) 4)) 16)) (do
                 (destroy_window (windowStruct))
                 (= running 0)
-            ) (do
+            ) (u< (w@ (+ (vos_event_args) 4)) 16) (do
                 (start_dragging_window (windowStruct))
             ))
             (handle_widget_click (windowStruct) (w@ (vos_event_args)) (w@ (+ (vos_event_args) 4)))
