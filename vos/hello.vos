@@ -1,17 +1,41 @@
 (include_asm "start.asm")
 
 (const EVENT_TYPE_MOUSE_CLICK 0)
+(const EVENT_TYPE_BUTTON_CLICK 0x80000000)
+(const WIDGET_TYPE_BUTTON 0)
 
-(externFn new_window destroy_window draw_str_to_overlay get_window_overlay_number vos_next_win_event save_state_and_yield_task start_dragging_window)
+(externFn new_window destroy_window draw_str_to_overlay get_window_overlay_number vos_next_win_event save_state_and_yield_task start_dragging_window draw_widgets_to_window handle_widget_click)
 (extern vos_event_args)
 
+(struct Fox32OSButtonWidget
+    4 next
+    4 id
+    4 type
+    4 text
+    4 fg_color
+    4 bg_color
+    2 width
+    2 reserved
+    2 x
+    2 y
+)
+
 (var windowStruct 36)
+(var buttonStruct 32)
 
 (fn main ()
     (int running eventID)
     (= running 1)
-    (new_window (windowStruct) "Vos Demo" 256 128 128 128 0 0)
+    (w! (+ (buttonStruct) (Fox32OSButtonWidget.type)) (WIDGET_TYPE_BUTTON))
+    (w! (+ (buttonStruct) (Fox32OSButtonWidget.text)) "click me!")
+    (w! (+ (buttonStruct) (Fox32OSButtonWidget.fg_color)) 0xFF000000)
+    (w! (+ (buttonStruct) (Fox32OSButtonWidget.bg_color)) 0xFFFFFFFF)
+    (h! (+ (buttonStruct) (Fox32OSButtonWidget.width)) 88)
+    (h! (+ (buttonStruct) (Fox32OSButtonWidget.x)) 16)
+    (h! (+ (buttonStruct) (Fox32OSButtonWidget.y)) 112)
+    (new_window (windowStruct) "Vos Demo" 256 128 128 128 0 (buttonStruct))
     (draw_str_to_overlay "hello vos world :3" 8 24 0xFFFFFFFF 0xFF000000 (get_window_overlay_number (windowStruct)))
+    (draw_widgets_to_window (windowStruct))
     (while running
         (= eventID (vos_next_win_event (windowStruct)))
         (if (== eventID (EVENT_TYPE_MOUSE_CLICK)) (do
@@ -20,6 +44,11 @@
                 (= running 0)
             ) (do
                 (start_dragging_window (windowStruct))
+            ))
+            (handle_widget_click (windowStruct) (w@ (vos_event_args)) (w@ (+ (vos_event_args) 4)))
+        ) (== eventID (EVENT_TYPE_BUTTON_CLICK)) (do
+            (if (== (w@ (vos_event_args)) 0) (do
+                (draw_str_to_overlay "button clicked!" 8 40 0xFFFFFFFF 0xFF000000 (get_window_overlay_number (windowStruct)))
             ))
         ))
         (save_state_and_yield_task)
