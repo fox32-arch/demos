@@ -7,6 +7,7 @@
     mov r4, 64
     mov r5, 64
     mov r6, menu_items_root
+    mov r7, 0
     call new_window
 
 event_loop:
