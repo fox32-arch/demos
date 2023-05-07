@@ -5,4 +5,4 @@
  - [cputest](cputest) - CPU test suite
  - [gcc](gcc) - experiments in compiling C code
  - [rust](rust) - experiments in compiling Rust code
- - [vos](vos) - demo program written in vos
+ - [okameron](okameron) - demo program written in [Okameron](https://github.com/TalonFox/okameron)
