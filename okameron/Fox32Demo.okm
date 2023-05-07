@@ -4,7 +4,7 @@ MODULE Fox32Demo;
                     OKMNextWinEvent, save_state_and_yield_task, start_dragging_window, handle_widget_click: LONG;
     EXTERN eventArgs: ARRAY 8 OF LONG;
     EXTERN EVENT_TYPE_MOUSE_CLICK, EVENT_TYPE_BUTTON_CLICK, WIDGET_TYPE_BUTTON: LONG;
-    
+
     TYPE Fox32OSButtonWidget = RECORD
         next, id, type, text, fgColor, bgColor, width: INT;
         x, y: SHORT;
