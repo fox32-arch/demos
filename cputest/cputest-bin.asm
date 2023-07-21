@@ -49,5 +49,9 @@ disk_init:
 new_world:
 	rjmp	main
 
+	; Bootable magic bytes
+	org.pad	0x1001FC
+	data.32 0x523C334C
+
 #include "cputest.asm"
 end:
