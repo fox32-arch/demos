@@ -1,0 +1,39 @@
+(* terminal I/O demo. invoke as: *)
+(* 1> TermOkm *)
+(* 1> TermOkm fox *)
+
+MODULE TermOkm;
+    IMPORT OS;
+
+    EXTERN terminalStreamPtr: PTR;
+    EXTERN arg0Ptr: PTR;
+    EXTERN arg1Ptr: PTR;
+    EXTERN arg2Ptr: PTR;
+    EXTERN arg3Ptr: PTR;
+
+    PROCEDURE Main();
+    VAR input: CHAR;
+    BEGIN
+        Print("hello ");
+        IF arg0Ptr THEN
+            Print(arg0Ptr);
+        ELSE
+            Print("world");
+        END;
+        Print("!\nPress any key to exit.\n");
+
+        input := 0;
+        WHILE 1 DO
+            read(1, terminalStreamPtr, PTROF(input));
+            IF input THEN
+                end_current_task();
+            END;
+            save_state_and_yield_task();
+        END;
+    END;
+
+    PROCEDURE Print(string: POINTER TO CHAR;);
+    BEGIN
+        write(string_length(string), terminalStreamPtr, string);
+    END;
+END.

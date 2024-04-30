@@ -5,4 +5,5 @@
  - [cputest](cputest) - CPU test suite
  - [gcc](gcc) - experiments in compiling C code
  - [rust](rust) - experiments in compiling Rust code
- - [okameron](okameron) - demo program written in [Okameron](https://github.com/TalonFox/okameron)
+ - [okameron](okameron) - demo GUI program written in [Okameron](https://github.com/TalonFox/okameron)
+ - [okameron-cli](okameron-cli) - demo CLI program written in [Okameron](https://github.com/TalonFox/okameron)

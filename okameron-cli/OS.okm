@@ -1,0 +1,5 @@
+(* FIXME: this module should probably be moved somewhere global so all applications can use it *)
+
+MODULE OS;
+    EXTERN PROCEDURE read, write, string_length, end_current_task, save_state_and_yield_task: INT;
+END.
