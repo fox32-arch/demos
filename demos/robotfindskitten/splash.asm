@@ -2,6 +2,7 @@
 
 splash_setup:
     ; disable the overlays used during the game and clear the background
+    call disable_menu_bar
     mov r0, 0
     call disable_overlay
     mov r0, 1
@@ -67,7 +68,6 @@ splash_loop:
     cmp r0, EVENT_TYPE_KEY_DOWN
     ifz jmp game_setup
 
-    call yield_task
     jmp splash_loop
 
 version_string:        data.str "robotfindskitten v2.7182818.701/fox32"                                      data.8 0

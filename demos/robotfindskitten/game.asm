@@ -106,7 +106,6 @@ game_loop:
     cmp r0, EVENT_TYPE_KEY_DOWN
     ifz call key_down_event
 
-    call yield_task
     jmp game_loop
 
 ; called when the robot finds the kitten :3
@@ -143,14 +142,12 @@ found_kitten_loop:
     cmp r0, EVENT_TYPE_KEY_DOWN
     ifz jmp found_kitten_key_down_event
 
-    call yield_task
     jmp found_kitten_loop
 found_kitten_key_down_event:
     cmp r1, 0x15 ; Y key
     ifz jmp game_setup
     cmp r1, 0x31 ; N key
-    ifz icl
-    ifz halt
+    ifz jmp 0xF0000000
 
     jmp found_kitten_loop
 
@@ -162,8 +159,7 @@ found_kitten_key_down_event:
 key_down_event:
     ; check if the user wants to quit (Q key)
     cmp.8 r1, 0x10
-    ifz icl
-    ifz halt
+    ifz jmp 0xF0000000
 
     ; check for arrow keys
     cmp.8 r1, 0x67 ; up
