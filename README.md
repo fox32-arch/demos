@@ -1,5 +1,6 @@
 # fox32 Demos and Tutorials
 
+ - [boot](boot) - bootable demo programs
  - [demos](demos) - demo programs
  - [tutorials](tutorials) - getting started tutorials
  - [cputest](cputest) - CPU test suite
