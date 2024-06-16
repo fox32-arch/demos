@@ -1,4 +1,5 @@
 *.fxf
+*.rsf
 *.bin
 *.img
 demos/audio/audio.raw

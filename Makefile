@@ -12,10 +12,11 @@ SRC = \
       demos/robotfindskitten/rfk.asm \
       demos/widget/widget.asm \
       demos/window/window.asm \
+	  demos/resource/resource.asm \
       demos/terminal/termio.asm \
       cputest/cputest.asm
 
-FXF = $(subst .asm,.fxf,$(SRC))
+FXF = $(subst .asm,.fxf,$(SRC)) demos/resource/resource.rsf
 
 BIN = cputest/cputest.bin
 
@@ -29,10 +30,14 @@ demos/robotfindskitten/rfk.fxf: $(wildcard demos/robotfindskitten/*.asm)
 cputest/cputest.fxf: $(wildcard cputest/*.asm)
 
 demos/audio/audio.fxf: demos/audio/audio.raw
-
 demos/audio/audio.raw:
 	# create empty dummy file
 	touch $@
+
+demos/resource/resource.fxf: demos/resource/resource.rsf.asm
+demos/resource/resource.rsf: demos/resource/resource.rsf.asm
+	$(FOX32ASM) demos/resource/resource.rsf.asm demos/resource/resource.res.fxf
+	mv demos/resource/resource.res.fxf demos/resource/resource.rsf
 
 cputest/cputest.bin: cputest/cputest-bin.asm $(wildcard cputest/*.asm)
 	$(FOX32ASM) $< $@
