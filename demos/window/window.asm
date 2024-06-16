@@ -139,7 +139,7 @@ close_window:
 brush_size: data.8 16
 
 window_title: data.str "Window Demo" data.8 0
-window_struct: data.fill 0, 36
+window_struct: data.fill 0, 40
 
 menu_items_root:
     data.8 2                                                      ; number of menus

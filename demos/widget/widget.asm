@@ -108,7 +108,7 @@ close_window:
     call end_current_task
 
 window_title: data.str "Widget Demo" data.8 0
-window_struct: data.fill 0, 36
+window_struct: data.fill 0, 40
 
 button_0_widget:
     data.32 button_1_widget    ; next_ptr

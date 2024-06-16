@@ -29,7 +29,7 @@ struct button_widget_s button = {
     .y = 112
 };
 
-unsigned char window_struct[36];
+unsigned char window_struct[40];
 struct return8 window_event;
 bool running = true;
 

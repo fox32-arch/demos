@@ -10,7 +10,7 @@ MODULE Fox32Demo;
         x, y: SHORT;
     END;
 
-    VAR window: ARRAY 36 OF CHAR;
+    VAR window: ARRAY 40 OF CHAR;
         button: Fox32OSButtonWidget;
 
     PROCEDURE Main();
