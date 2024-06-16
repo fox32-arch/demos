@@ -3,7 +3,7 @@
     mov r0, window_struct
     mov r1, window_title
     mov r2, 256
-    mov r3, 128
+    mov r3, 256
     mov r4, 64
     mov r5, 64
     mov r6, 0
@@ -25,6 +25,12 @@ event_loop:
     cmp r0, EVENT_TYPE_MOUSE_CLICK
     ifz call mouse_click_event
 
+    ; did the user press a key?
+    cmp r0, EVENT_TYPE_KEY_DOWN
+    ifz call key_down_event
+    cmp r0, EVENT_TYPE_KEY_UP
+    ifz call key_up_event
+
     ; did the user click a button?
     cmp r0, EVENT_TYPE_BUTTON_CLICK
     ifz call button_click_event
@@ -42,6 +48,24 @@ mouse_click_event:
     ; check if we are clicking on a widget
     mov r0, window_struct
     call handle_widget_click
+
+    pop r0
+    ret
+
+key_down_event:
+    push r0
+
+    mov r0, window_struct
+    call handle_widget_key_down
+
+    pop r0
+    ret
+
+key_up_event:
+    push r0
+
+    mov r0, window_struct
+    call handle_widget_key_up
 
     pop r0
     ret
@@ -124,7 +148,7 @@ button_0_widget:
 button_0_text: data.str "button 0" data.8 0
 
 button_1_widget:
-    data.32 0                  ; next_ptr
+    data.32 textbox_sl_widget  ; next_ptr
     data.32 1                  ; id
     data.32 WIDGET_TYPE_BUTTON ; type
     data.32 button_1_text      ; text_ptr
@@ -135,6 +159,19 @@ button_1_widget:
     data.16 16                 ; x_pos
     data.16 64                 ; y_pos
 button_1_text: data.str "button 1" data.8 0
+
+textbox_sl_widget:
+    data.32 0                  ; next_ptr
+    data.32 2                  ; id
+    data.32 WIDGET_TYPE_TEXTBOX_SL ; type
+    data.32 textbox_sl_buffer  ; text_ptr
+    data.32 0xFF000000         ; foreground_color
+    data.32 0xFFAAAAAA         ; background_color
+    data.16 128                ; width
+    data.16 16                 ; buffer_max
+    data.16 16                 ; x_pos
+    data.16 192                ; y_pos
+textbox_sl_buffer: data.fill 0, 16
 
 button_0_clicked_text: data.str "button 0 clicked!" data.8 0
 button_1_clicked_text: data.str "button 1 clicked!" data.8 0
