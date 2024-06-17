@@ -11,7 +11,7 @@ const WIDGET_TYPE_LABEL: 0x00000002
     ; format: 3 character null-terminated ID, pointer to data, size
     data.strz "WIN" data.32 win data.32 40
     data.strz "MNU" data.32 mnu data.32 32 ; REMEMBER TO CHANGE THIS SIZE!!
-    data.strz "WID" data.32 wid data.32 32 ; REMEMBER TO CHANGE THIS SIZE!!
+    data.strz "WID" data.32 wid data.32 44 ; REMEMBER TO CHANGE THIS SIZE!!
 
 ; WIN resource layout (40 bytes):
 ;    data.fill 0, 32 - null-terminated window title
