@@ -61,9 +61,7 @@
     mov r0, lf
     call print
 
-    ; free all blocks and exit
-    mov r0, [first_4byte_ptr]
-    call free_memory
+    ; free all live blocks and exit
     mov r0, [second_4byte_ptr]
     call free_memory
     mov r0, [third_4byte_ptr]
