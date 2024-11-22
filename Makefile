@@ -12,8 +12,10 @@ SRC = \
       demos/robotfindskitten/rfk.asm \
       demos/widget/widget.asm \
       demos/window/window.asm \
-	  demos/resource/resource.asm \
+      demos/resource/resource.asm \
       demos/terminal/termio.asm \
+      demos/peter/peter.asm \
+      demos/foxfetch/foxfetch.asm \
       cputest/cputest.asm
 
 FXF = $(subst .asm,.fxf,$(SRC)) demos/resource/resource.rsf
